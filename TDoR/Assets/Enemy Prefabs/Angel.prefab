@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8793803436863205555}
   m_Layer: 0
   m_Name: Angel
-  m_TagString: Enemy
+  m_TagString: Angel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,8 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  moveSpeed: 10
   damage: 4
-  health: 200
+  health: 100
 --- !u!195 &8793803436863205555
 NavMeshAgent:
   m_ObjectHideFlags: 0

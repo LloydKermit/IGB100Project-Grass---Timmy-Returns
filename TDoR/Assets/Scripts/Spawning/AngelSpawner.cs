@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatSpawner : MonoBehaviour
+public class AngelSpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public GameObject[] enemyPrefab;
 
-    public int BatCount;
-    public int MaxBat;
+    public int AngelCount;
+    public int MaxAngel;
 
     // Start is called before the first frame update
     void Start()
     {
-        MaxBat = 100;
+        MaxAngel = 100;
         StartCoroutine(StartSceneWait());
     }
 
@@ -26,20 +26,20 @@ public class BatSpawner : MonoBehaviour
     IEnumerator StartSceneWait()
     {
         yield return new WaitForSeconds(1f);
-        StartCoroutine(Bat());
+        StartCoroutine(Angel());
     }
 
-    IEnumerator Bat()
+    IEnumerator Angel()
     {
-        yield return new WaitForSeconds(0.1f);
-        BatCount = GameObject.FindGameObjectsWithTag("LDem").Length;
+        yield return new WaitForSeconds(1f);
+        AngelCount = GameObject.FindGameObjectsWithTag("Angel").Length;
 
-        if (BatCount < MaxBat)
+        if (AngelCount < MaxAngel)
         {
             int randspawnpoint = Random.Range(0, spawnPoints.Length);
             var cloneBat = Instantiate(enemyPrefab[0], spawnPoints[randspawnpoint].position, Quaternion.identity);
         }
-        StartCoroutine(Bat());
+        StartCoroutine(Angel());
     }
 
 }

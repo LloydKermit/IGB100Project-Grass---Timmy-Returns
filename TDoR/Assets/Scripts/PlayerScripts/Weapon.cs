@@ -51,7 +51,7 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, ARrange))
         {
             //Damage Enemies
-            if (hit.transform.tag == "Enemy")
+            if (hit.transform.tag == "Angel" || hit.transform.tag == "Archangel" || hit.transform.tag == "Seraph")
             {
                 hit.transform.GetComponent<Enemy>().takeDamage(ARdamage);
 

@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour
 
     public GameObject target;
 
+    public float moveSpeed = 10f;
     public int damage = 4;
-    public int health = 50;
+    public int health = 100;
 
 
     private void Start()
@@ -39,9 +40,17 @@ public class Enemy : MonoBehaviour
 
     public void Movement()
     {
-        if (target)
+        try
         {
-            agent.destination = target.transform.position;
+            if (target)
+            {
+                agent.destination = target.transform.position;
+                agent.speed = moveSpeed;
+            }
+        }
+        catch
+        {
+
         }
     }
     public void takeDamage(int damage)
