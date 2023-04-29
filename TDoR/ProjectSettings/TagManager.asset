@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
-  - Enemy
+  - Blue
+  - Angel
+  - FenceBorder
+  - AngelSpawner
+  - Trigger
   layers:
   - Default
   - TransparentFX

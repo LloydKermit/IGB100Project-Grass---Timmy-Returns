@@ -14,7 +14,6 @@ public class AngelSpawner : MonoBehaviour
     void Start()
     {
         MaxAngel = 100;
-        StartCoroutine(StartSceneWait());
     }
 
     // Update is called once per frame
@@ -23,13 +22,13 @@ public class AngelSpawner : MonoBehaviour
 
     }
 
-    IEnumerator StartSceneWait()
+    public IEnumerator StartSceneWait()
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(Angel());
     }
 
-    IEnumerator Angel()
+    public IEnumerator Angel()
     {
         yield return new WaitForSeconds(1f);
         AngelCount = GameObject.FindGameObjectsWithTag("Angel").Length;
