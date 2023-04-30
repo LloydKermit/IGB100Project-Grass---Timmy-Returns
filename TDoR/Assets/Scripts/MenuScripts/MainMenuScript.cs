@@ -9,6 +9,7 @@ public class MainMenuScript : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void QuitGame()

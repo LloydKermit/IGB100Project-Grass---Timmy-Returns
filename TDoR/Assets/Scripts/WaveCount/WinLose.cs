@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class WinLose : MonoBehaviour 
 {
     public static int WavesCount = 0;
+    public static int AngelsLeft = 0;
+    public static int AngelsKilled = 0;
 
     //public PauseMenu winDeathMenu;
 

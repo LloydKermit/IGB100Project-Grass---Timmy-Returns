@@ -15,9 +15,12 @@ public class Enemy : MonoBehaviour
     public int damage = 4;
     public int health = 100;
 
+    WaveText waveText;
 
     private void Start()
     {
+        waveText = GameObject.Find("GameController").GetComponent<WaveText>();
+
         //Player Reference exception catch
         try
         {
@@ -60,7 +63,12 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             Die();
+
+            WinLose.AngelsKilled += 1;
+            waveText.AngelsLeft();
         }
+
+
     }
 
     public void Die()
