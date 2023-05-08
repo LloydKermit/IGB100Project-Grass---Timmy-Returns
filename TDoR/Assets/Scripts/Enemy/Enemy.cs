@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 10f;
     public int damage = 4;
     public int health = 100;
+    public Collider triggerCollider;
 
     WaveText waveText;
 
@@ -34,6 +36,11 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         Movement();
+
+        if (Time.time >= PlayerScript.nextHit)
+        {
+            triggerCollider.enabled = true;
+        }
     }
 
     private void FixedUpdate()
@@ -82,13 +89,17 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    TimmyHealth health = collision.GetComponent<TimmyHealth>();
+    private void OnTriggerEnter(Collider collision)
+    {
+        Debug.Log(collision + " Touched.");
 
-    //    if (health != null)
-    //    {
-    //        health.TakeDamage(damage);
-    //    }
-    //}
+        PlayerScript health = collision.GetComponent<PlayerScript>();
+        triggerCollider.enabled = false;
+
+        if (health.currentHealth > 0 && Time.time >= PlayerScript.nextHit)
+        {
+            PlayerScript.nextHit = Time.time + health.hitCD;
+            health.takedamage(damage);
+        }
+    }
 }
