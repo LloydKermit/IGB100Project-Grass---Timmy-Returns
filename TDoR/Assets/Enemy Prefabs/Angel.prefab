@@ -130,6 +130,7 @@ MonoBehaviour:
   damage: 4
   health: 100
   triggerCollider: {fileID: -7714925750139170144}
+  tookDamage: 0
 --- !u!195 &8793803436863205555
 NavMeshAgent:
   m_ObjectHideFlags: 0

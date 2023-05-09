@@ -13,14 +13,17 @@ public class Enemy : MonoBehaviour
     public GameObject target;
 
     public float moveSpeed = 10f;
-    public int damage = 4;
+    public int damage = 1;
     public int health = 100;
     public Collider triggerCollider;
+    public bool beingHit = false;
 
+    PlayerScript player;
     WaveText waveText;
 
     private void Start()
     {
+        player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
 
         //Player Reference exception catch
@@ -32,6 +35,7 @@ public class Enemy : MonoBehaviour
         {
             target = null;
         }
+
     }
     private void Update()
     {
@@ -91,15 +95,18 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log(collision + " Touched.");
+        StartCoroutine(TakeHit());
+    }
 
-        PlayerScript health = collision.GetComponent<PlayerScript>();
-        triggerCollider.enabled = false;
+    private void OnTriggerExit(Collider collision)
+    {
+        StopAllCoroutines();
+    }
 
-        if (health.currentHealth > 0 && Time.time >= PlayerScript.nextHit)
-        {
-            PlayerScript.nextHit = Time.time + health.hitCD;
-            health.takedamage(damage);
-        }
+    IEnumerator TakeHit()
+    {
+        player.takedamage(damage);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(TakeHit());
     }
 }
