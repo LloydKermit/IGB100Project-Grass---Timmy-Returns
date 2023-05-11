@@ -14,7 +14,7 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject pauseMenuUI;
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gamePaused)
@@ -57,6 +57,13 @@ public class PauseMenuScript : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+        WinLose.WavesCount = 0;
+        WinLose.AngelsLeft = 0;
+        WinLose.AngelsKilled = 0;
+
+        Timer.TimeisRunning = false;
+        Timer.TimeElapsed = 0;
 
         gamePaused = false;
     }

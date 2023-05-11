@@ -10,10 +10,8 @@ public class PlayerScript : MonoBehaviour
     public int currentHealth;
 
     public float hitCD = 1;
-    public static float nextHit = 0f;
 
     public HealthBar healthBar;
-    public bool canTakeDmg = true;
 
     // Start is called before the first frame update
     void Start()

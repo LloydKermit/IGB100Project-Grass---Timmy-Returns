@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviour
     public int damage = 1;
     public int health = 100;
     public Collider triggerCollider;
-    public bool beingHit = false;
 
     PlayerScript player;
     WaveText waveText;
@@ -40,11 +39,6 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         Movement();
-
-        if (Time.time >= PlayerScript.nextHit)
-        {
-            triggerCollider.enabled = true;
-        }
     }
 
     private void FixedUpdate()
