@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
                 GameObject EnemyImpact = Instantiate(EnemyhitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(EnemyImpact, 1f);
             }
-            else
+            else if (hit.transform.tag != "FenceBorder")
             {
                 GameObject NonEnemyImpact = Instantiate(NonEnemyhitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(NonEnemyImpact, 1f);

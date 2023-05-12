@@ -68,7 +68,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
 #endif
-		private CharacterController _controller;
+		public CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
@@ -151,7 +151,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Move()
+		public void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
