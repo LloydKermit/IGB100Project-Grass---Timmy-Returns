@@ -8,11 +8,9 @@ public class OuterTrigger : MonoBehaviour
 {
     public static bool gateClosed;
     public GameObject Gate;
-    public GameObject GateBorder;
     public GameObject Spawners;
     public GameObject InnerTrig;
 
-    BoxCollider gateBCollide;
     MeshRenderer gateMesh;
     MeshCollider gateCollider;
 
@@ -30,7 +28,6 @@ public class OuterTrigger : MonoBehaviour
         gateMesh = Gate.GetComponent<MeshRenderer>();
         gateCollider = Gate.GetComponent<MeshCollider>();
         angelSpawner = Spawners.GetComponent<AngelSpawner>();
-        gateBCollide = GateBorder.GetComponent<BoxCollider>();
         InnerTrig = GameObject.FindGameObjectWithTag("InnerTrigger");
 
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
@@ -45,7 +42,6 @@ public class OuterTrigger : MonoBehaviour
             gateClosed = false;
             gateMesh.enabled = false;
             gateCollider.enabled = false;
-            gateBCollide.enabled = false;
 
         }
 
@@ -68,7 +64,6 @@ public class OuterTrigger : MonoBehaviour
                 gateClosed = true;
                 gateMesh.enabled = true;
                 gateCollider.enabled = true;
-                gateBCollide.enabled = true;
 
                 //var fenceBorder = GameObject.FindGameObjectsWithTag("FenceBorder");
                 //for (var i = 0; i < fenceBorder.Length; i++)

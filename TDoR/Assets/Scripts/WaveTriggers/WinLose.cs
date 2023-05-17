@@ -8,6 +8,28 @@ public class WinLose : MonoBehaviour
     public static int WavesCount = 0;
     public static int AngelsLeft = 0;
     public static int AngelsKilled = 0;
+    public static bool BossDead = false;
+
+    public GameObject upgradePrompt;
+
+    WaveText waveText;
+
+    public void Start()
+    {
+        waveText = GetComponent<WaveText>();
+    }
+
+    public void Update()
+    {
+        if (waveText.waveCleared == true && WavesCount != 0)
+        {
+            upgradePrompt.layer = 6;
+        }
+        else
+        {
+            upgradePrompt.layer = 0;
+        }
+    }
 
     //public PauseMenu winDeathMenu;
 

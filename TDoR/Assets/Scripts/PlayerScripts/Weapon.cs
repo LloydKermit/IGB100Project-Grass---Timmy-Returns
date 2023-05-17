@@ -12,10 +12,13 @@ public class Weapon : MonoBehaviour
     public GameObject EnemyhitEffect;
     public GameObject NonEnemyhitEffect;
     public AudioSource AR15;
+    private PlayerScript playerScript;
 
     public int ARdamage = 25;
     public float ARrange = 100f;
-    public float ARfireRate = 0.1f;
+    public float ARfireRate = 0.2f;
+
+    [SerializeField] private GameObject Player;
 
     public Camera fpsCam;
 
@@ -25,6 +28,10 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ARdamage = 25;
+        ARfireRate = 0.2f;
+
+        playerScript = Player.GetComponent<PlayerScript>();
         Fireanimation = GetComponent<Animation>();
     }
     void Update()
@@ -55,6 +62,12 @@ public class Weapon : MonoBehaviour
             {
                 hit.transform.GetComponent<Enemy>().takeDamage(ARdamage);
 
+                //Bountiful Harvest
+                if (playerScript.BountifulHarvest == true)
+                {
+                    playerScript.LifeLeach();
+                }
+
                 GameObject EnemyImpact = Instantiate(EnemyhitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(EnemyImpact, 1f);
             }
@@ -66,49 +79,13 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    //    Animation Fireanimation;
+    public void SetWeaponDmg(int weaponDmgMod)
+    {
+        ARdamage += weaponDmgMod;
+    }
 
-    //    // Weapon Attributes
-    //    public float ARDmg = 25.0f;
-    //    public float fireRate = 0.1f;
-    //    public int damage = 1;
-    //    private float fireTime;
-
-    //    // Fire origin and Target object
-    //    public GameObject firePoint;
-    //    public GameObject Target;
-
-    //    // Start is called before the first frame update
-    //    void Start()
-    //    {
-    //        Fireanimation = GetComponent<Animation>();
-    //    }
-
-    //    // Update is called once per frame
-    //    void Update()
-    //    {
-    //        ARFiring();
-    //    }
-
-    //    private void ARFiring()
-    //    {
-    //        if (Input.GetMouseButton(0) && Time.time > fireTime)
-    //        {
-    //            Fireanimation.Play("fire");
-
-    //            //Raycast Projectile
-    //            RaycastHit hit;
-    //            if (Physics.Raycast(firePoint.transform.position, -(firePoint.transform.position - Target.transform.position).normalized, out hit, 50.0f))
-    //            {
-
-    //                //Damage Enemies
-    //                if (hit.transform.tag == "Enemy")
-    //                {
-    //                    hit.transform.GetComponent<Enemy>().takeDamage(damage);
-    //                }
-
-    //            }
-    //;
-    //        }
-    //    }
+    public void SetWeaponFireRate(float weaponFireRateMod)
+    {
+        ARfireRate /= weaponFireRateMod;
+    }
 }

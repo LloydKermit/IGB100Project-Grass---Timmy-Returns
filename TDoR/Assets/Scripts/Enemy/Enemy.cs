@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public GameObject target;
 
     public float moveSpeed = 10f;
-    public int damage = 1;
+    public int damage = 20;
     public int health = 100;
     public Collider triggerCollider;
 
@@ -22,7 +22,19 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        moveSpeed = 10f;
+        if (this.tag == "Angel")
+        {
+            damage = 20;
+            health = 100;
+        }
+        else if (this.tag == "Seraph")
+        {
+            damage = 500;
+            health = 10000;
+
+            player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+        }
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
 
         //Player Reference exception catch
@@ -63,6 +75,11 @@ public class Enemy : MonoBehaviour
     }
     public void takeDamage(int damage)
     {
+        if (player.BindingBrambles == true)
+        {
+            StartCoroutine(SlowDown());
+        }
+
         health -= damage;
 
         if (health <= 0)
@@ -71,9 +88,12 @@ public class Enemy : MonoBehaviour
 
             WinLose.AngelsKilled += 1;
             waveText.AngelsLeft();
+
+            if (this.tag == "Seraph")
+            {
+                WinLose.BossDead = true;
+            }
         }
-
-
     }
 
     public void Die()
@@ -102,5 +122,12 @@ public class Enemy : MonoBehaviour
         player.takedamage(damage);
         yield return new WaitForSeconds(1);
         StartCoroutine(TakeHit());
+    }
+
+    IEnumerator SlowDown()
+    {
+        moveSpeed -= 1f;
+        yield return new WaitForSeconds(1f);
+        moveSpeed += 10f;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AngelSpawner : MonoBehaviour
 {
+    public Transform bossSpawn;
     public Transform[] spawnPoints;
     public GameObject[] enemyPrefab;
 
@@ -15,7 +16,7 @@ public class AngelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxAngel = 20;
+        MaxAngel = 10;
         WinLose.AngelsLeft = MaxAngel;
 
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
@@ -24,7 +25,10 @@ public class AngelSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (WinLose.WavesCount == 7)
+        {
+            var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(180, 0, 0)));
+        }
     }
 
     public IEnumerator StartSceneWait()
@@ -41,23 +45,33 @@ public class AngelSpawner : MonoBehaviour
         if (AngelCount < MaxAngel)
         {
             int randspawnpoint = Random.Range(0, spawnPoints.Length);
-            var cloneBat = Instantiate(enemyPrefab[0], spawnPoints[randspawnpoint].position, Quaternion.identity);
+            var cloneAngel = Instantiate(enemyPrefab[0], spawnPoints[randspawnpoint].position, Quaternion.Euler(new Vector3(180, 0, 0 )));
 
             AngelCount += 1;
         }
 
         Coroutine Angels = StartCoroutine(Angel());
 
-        if (WinLose.AngelsKilled == WinLose.AngelsLeft)
+        if (WinLose.WavesCount < 7)
         {
-            StopCoroutine(Angels);
-            AngelCount = 0;
+            if (WinLose.AngelsKilled == WinLose.AngelsLeft)
+            {
+                StopCoroutine(Angels);
+                AngelCount = 0;
 
-            waveText.WaveDone();
+                waveText.WaveDone();
 
-            MaxAngel = 20 + (10 * (WinLose.WavesCount) / 5);
-            WinLose.AngelsLeft = MaxAngel;
-            WinLose.AngelsKilled = 0;
+                MaxAngel = 10 + (10 * (WinLose.WavesCount) / 5);
+                WinLose.AngelsLeft = MaxAngel;
+                WinLose.AngelsKilled = 0;
+            }
+        }
+        else if (WinLose.WavesCount == 7)
+        {
+            if (WinLose.BossDead == true)
+            {
+                waveText.WaveDone();
+            }
         }
     }
 
