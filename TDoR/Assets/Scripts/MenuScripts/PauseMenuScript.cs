@@ -118,6 +118,8 @@ public class PauseMenuScript : MonoBehaviour
 
         Timer.TimeisRunning = true;
         Timer.TimeElapsed = 0;
+
+        OuterTrigger.gateClosed = false;
     }
 
     public void QuitGame()

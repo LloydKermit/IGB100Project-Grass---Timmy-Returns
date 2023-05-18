@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour
             healthBar.SetHealth(currentHealth);
         }
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
             Die();
         }

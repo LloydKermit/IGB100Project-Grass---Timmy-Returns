@@ -12,6 +12,7 @@ public class AngelSpawner : MonoBehaviour
 
     public int AngelCount;
     public int MaxAngel;
+    private int bossCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,10 @@ public class AngelSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (WinLose.WavesCount == 7)
+        if (WinLose.WavesCount == 7 && bossCount == 0)
         {
             var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(180, 0, 0)));
+            bossCount++;
         }
     }
 
@@ -61,7 +63,7 @@ public class AngelSpawner : MonoBehaviour
 
                 waveText.WaveDone();
 
-                MaxAngel = 10 + (10 * (WinLose.WavesCount) / 5);
+                MaxAngel = 10 + (5 * WinLose.WavesCount);
                 WinLose.AngelsLeft = MaxAngel;
                 WinLose.AngelsKilled = 0;
             }
