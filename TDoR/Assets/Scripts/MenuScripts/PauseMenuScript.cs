@@ -12,6 +12,8 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject Player;
     public GameObject Weapon;
     public GameObject pauseMenuUI;
+    public GameObject winMenuUI;
+    public GameObject deathMenuUI;
     void Update()
     {
 
@@ -66,6 +68,56 @@ public class PauseMenuScript : MonoBehaviour
         Timer.TimeElapsed = 0;
 
         gamePaused = false;
+    }
+
+    public void Win()
+    {
+        winMenuUI.SetActive(true);
+
+        Time.timeScale = 0;
+
+        Weapon.GetComponent<Weapon>().enabled = false;
+        Player.GetComponent<FirstPersonController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+
+        gamePaused = true;
+        Timer.TimeisRunning = false;
+    }
+
+    public void Death()
+    {
+        deathMenuUI.SetActive(true);
+
+        Time.timeScale = 0;
+
+        Weapon.GetComponent<Weapon>().enabled = false;
+        Player.GetComponent<FirstPersonController>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+
+        gamePaused = true;
+        Timer.TimeisRunning = false;
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1f;
+
+        Weapon.GetComponent<Weapon>().enabled = true;
+        Player.GetComponent<FirstPersonController>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        gamePaused = false;
+
+        WinLose.WavesCount = 0;
+        WinLose.AngelsLeft = 0;
+        WinLose.AngelsKilled = 0;
+        WinLose.BossDead = false;
+        WinLose.canInteract = false;
+
+        Timer.TimeisRunning = true;
+        Timer.TimeElapsed = 0;
     }
 
     public void QuitGame()

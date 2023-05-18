@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class WinLose : MonoBehaviour
     public static bool BossDead = false;
     public static bool canInteract = false;
 
+    public PauseMenuScript Menu;
     public GameObject upgradePrompt;
 
     WaveText waveText;
@@ -36,20 +38,22 @@ public class WinLose : MonoBehaviour
         {
             canInteract = false;
         }
+
+        if (BossDead)
+        {
+            Win();
+        }
     }
 
-    //public PauseMenu winDeathMenu;
+    public void Win()
+    {
+        Menu.Win();
+    }
 
-    //public void Win()
-    //{
-    //    winDeathMenu.winMenuUI.SetActive(true);
-    //    Time.timeScale = 0f;
-    //}
-
-    //public void Lose()
-    //{
-    //    winDeathMenu.retryMenuUI.SetActive(true);
-    //}
+    public void Lose()
+    {
+        Menu.Death();
+    }
 
 
 }

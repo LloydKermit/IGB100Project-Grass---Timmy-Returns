@@ -103,6 +103,9 @@ public class UpgradeScript : MonoBehaviour
             case "Bountiful Harvest":
                 BountifulHarvest();
                 break;
+            case "Piercing Thorns":
+                PiercingThorns();
+                break;
             default:
                 Debug.LogWarning("Unknown power-up selected!");
                 break;
@@ -201,5 +204,10 @@ public class UpgradeScript : MonoBehaviour
     private void BountifulHarvest()
     {
         playerScript.BountifulHarvestOn();
+    }
+
+    public void PiercingThorns()
+    {
+        playerScript.PiercingThornOn();
     }
 }

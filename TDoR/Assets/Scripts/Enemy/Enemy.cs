@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
         {
             damage = 20;
             health = 100;
+
+            player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
         }
         else if (this.tag == "Seraph")
         {

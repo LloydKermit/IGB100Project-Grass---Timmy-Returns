@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     FirstPersonController firstPersonController;
+    WinLose winlose;
 
     public int maxHealth = 200;
     public int currentHealth;
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public bool StoneSkin = false;
     public bool BindingBrambles = false;
     public bool BountifulHarvest = false;
+    public bool PiercingThorn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +28,18 @@ public class PlayerScript : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
 
         firstPersonController = GetComponent<FirstPersonController>();
+        winlose = GameObject.Find("GameController").GetComponent<WinLose>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void Die()
+    {
+        winlose.Lose();
     }
 
     public void Heal()
@@ -53,6 +61,11 @@ public class PlayerScript : MonoBehaviour
             currentHealth -= damage;
 
             healthBar.SetHealth(currentHealth);
+        }
+
+        if (currentHealth == 0)
+        {
+            Die();
         }
     }
 
@@ -88,11 +101,17 @@ public class PlayerScript : MonoBehaviour
         BountifulHarvest = true;
     }
 
+    //Used for Bountiful Harvest
     public void LifeLeach()
     {
         if (currentHealth != maxHealth)
         {
             currentHealth += 1;
         }
+    }
+
+    public void PiercingThornOn()
+    {
+        PiercingThorn = true;
     }
 }

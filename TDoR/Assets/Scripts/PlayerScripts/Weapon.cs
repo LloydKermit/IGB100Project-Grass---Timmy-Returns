@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
     public int ARdamage = 25;
     public float ARrange = 100f;
     public float ARfireRate = 0.2f;
+    public float CritChance = 5.0f;
 
     [SerializeField] private GameObject Player;
 
@@ -60,7 +61,24 @@ public class Weapon : MonoBehaviour
             //Damage Enemies
             if (hit.transform.tag == "Angel" || hit.transform.tag == "Archangel" || hit.transform.tag == "Seraph")
             {
-                hit.transform.GetComponent<Enemy>().takeDamage(ARdamage);
+                //Piercing Thorns
+                float randValue = Random.Range(0.0f, 100.0f);
+
+                if (playerScript.PiercingThorn == true)
+                {
+                    if (randValue < CritChance)
+                    {
+                        hit.transform.GetComponent<Enemy>().takeDamage(ARdamage * 2);
+                    }
+                    else
+                    {
+                        hit.transform.GetComponent<Enemy>().takeDamage(ARdamage);
+                    }   
+                }
+                else
+                {
+                    hit.transform.GetComponent<Enemy>().takeDamage(ARdamage);
+                }
 
                 //Bountiful Harvest
                 if (playerScript.BountifulHarvest == true)
