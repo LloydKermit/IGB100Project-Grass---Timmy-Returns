@@ -130,6 +130,6 @@ public class Enemy : MonoBehaviour
     {
         moveSpeed -= 1f;
         yield return new WaitForSeconds(1f);
-        moveSpeed += 10f;
+        moveSpeed = 10f;
     }
 }
