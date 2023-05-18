@@ -35,6 +35,7 @@ public class WaveText : MonoBehaviour
 
     public void WaveDone()
     {
+        WinLose.canInteract = true;
         waveCleared = true;
         AngelCounter.text = "Wave Cleared";
     }

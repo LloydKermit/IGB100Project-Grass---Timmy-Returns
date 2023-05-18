@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class WinLose : MonoBehaviour 
@@ -9,6 +10,7 @@ public class WinLose : MonoBehaviour
     public static int AngelsLeft = 0;
     public static int AngelsKilled = 0;
     public static bool BossDead = false;
+    public static bool canInteract = false;
 
     public GameObject upgradePrompt;
 
@@ -21,13 +23,18 @@ public class WinLose : MonoBehaviour
 
     public void Update()
     {
-        if (waveText.waveCleared == true && WavesCount != 0)
+        if (canInteract)
         {
             upgradePrompt.layer = 6;
         }
         else
         {
             upgradePrompt.layer = 0;
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            canInteract = false;
         }
     }
 
