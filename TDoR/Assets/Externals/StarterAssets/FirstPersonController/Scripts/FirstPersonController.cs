@@ -86,6 +86,8 @@ namespace StarterAssets
 			}
 		}
 
+		[HideInInspector] public StaminaBar _staminaBar;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -97,6 +99,7 @@ namespace StarterAssets
 
 		private void Start()
 		{
+			_staminaBar = GetComponent<StaminaBar>();
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -161,6 +164,24 @@ namespace StarterAssets
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+
+			if (!_input.sprint)
+			{
+				_staminaBar.weAreSprinting = false;
+			}
+
+			if (_input.sprint && _controller.velocity.sqrMagnitude > 0)
+			{
+				if (_staminaBar.playerStamina > 0)
+				{
+					_staminaBar.weAreSprinting = true;
+					_staminaBar.Sprinting();
+				}
+				else
+				{
+					_input.sprint = false;
+				}
+			}
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;

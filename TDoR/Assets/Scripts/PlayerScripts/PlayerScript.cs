@@ -79,6 +79,8 @@ public class PlayerScript : MonoBehaviour
     {
         maxHealth += healthMod;
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
     public void StoneSkinOn()
@@ -107,6 +109,7 @@ public class PlayerScript : MonoBehaviour
         if (currentHealth != maxHealth)
         {
             currentHealth += 1;
+            healthBar.SetHealth(currentHealth);
         }
     }
 

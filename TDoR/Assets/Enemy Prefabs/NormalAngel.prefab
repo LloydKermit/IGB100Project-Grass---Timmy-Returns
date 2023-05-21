@@ -1498,6 +1498,7 @@ GameObject:
   - component: {fileID: 2187223175445229399}
   - component: {fileID: 6946149535029140310}
   - component: {fileID: 7108738755248675759}
+  - component: {fileID: -8593237782634556263}
   - component: {fileID: 4539461156190104060}
   m_Layer: 0
   m_Name: NormalAngel
@@ -1611,10 +1612,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 9
+  moveSpeed: 15
+  angelmovespeed: 15
   damage: 4
   health: 100
   triggerCollider: {fileID: 2187223175445229399}
+--- !u!114 &-8593237782634556263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294044817917815801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a2ed8732ede3841aa48efae41381f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &4539461156190104060
 NavMeshAgent:
   m_ObjectHideFlags: 0

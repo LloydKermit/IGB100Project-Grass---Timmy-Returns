@@ -8,79 +8,28 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    NavMeshAgent agent;
-
-    public GameObject target;
-
-    public float moveSpeed = 10f;
-    public int damage = 20;
-    public int health = 100;
+    public int damage;
+    public int health;
     public Collider triggerCollider;
 
-    PlayerScript player;
+    public float Binded = 0;
+
     WaveText waveText;
 
     private void Start()
     {
-        moveSpeed = 10f;
+        waveText = GameObject.Find("GameController").GetComponent<WaveText>();
+
         if (this.tag == "Angel")
         {
             damage = 20;
             health = 100;
-
-            player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
-        }
-        else if (this.tag == "Seraph")
-        {
-            damage = 500;
-            health = 10000;
-
-            player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
-        }
-        waveText = GameObject.Find("GameController").GetComponent<WaveText>();
-
-        //Player Reference exception catch
-        try
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
-        catch
-        {
-            target = null;
-        }
-
-    }
-    private void Update()
-    {
-        Movement();
-    }
-
-    private void FixedUpdate()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
-    public void Movement()
-    {
-        try
-        {
-            if (target)
-            {
-                agent.destination = target.transform.position;
-                agent.speed = moveSpeed;
-            }
-        }
-        catch
-        {
-
         }
     }
+
     public void takeDamage(int damage)
     {
-        if (player.BindingBrambles == true)
-        {
-            StartCoroutine(SlowDown());
-        }
+        Binded = -2;
 
         health -= damage;
 
@@ -105,31 +54,5 @@ public class Enemy : MonoBehaviour
         //(deathAni, 0.1f);
         Debug.Log("Enemy Dead");
         Destroy(gameObject);
-
-
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        StartCoroutine(TakeHit());
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        StopAllCoroutines();
-    }
-
-    IEnumerator TakeHit()
-    {
-        player.takedamage(damage);
-        yield return new WaitForSeconds(1);
-        StartCoroutine(TakeHit());
-    }
-
-    IEnumerator SlowDown()
-    {
-        moveSpeed -= 1f;
-        yield return new WaitForSeconds(1f);
-        moveSpeed = 10f;
     }
 }
