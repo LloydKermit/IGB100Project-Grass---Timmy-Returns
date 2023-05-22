@@ -11,19 +11,38 @@ public class Enemy : MonoBehaviour
     public int damage;
     public int health;
     public Collider triggerCollider;
+    public GameObject target;
 
     public float Binded = 0;
 
     WaveText waveText;
+    public PlayerScript player;
 
     private void Start()
     {
+        //Player Reference exception catch
+        try
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+        catch
+        {
+            target = null;
+        }
+
+        player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
+
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
 
         if (this.tag == "Angel")
         {
-            damage = 20;
             health = 100;
+            damage = 20;
+        }
+        if (this.tag == "Archangel")
+        {
+            health = 150;
+            damage = 50;
         }
     }
 
@@ -55,4 +74,12 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy Dead");
         Destroy(gameObject);
     }
+
+    public IEnumerator TakeHit()
+    {
+        player.takedamage(damage);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(TakeHit());
+    }
+
 }

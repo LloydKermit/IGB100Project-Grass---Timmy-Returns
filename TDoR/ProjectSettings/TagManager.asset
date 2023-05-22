@@ -15,6 +15,8 @@ TagManager:
   - Green
   - InnerTrigger
   - Seraph
+  - RayTarget
+  - Archangel
   layers:
   - Default
   - TransparentFX

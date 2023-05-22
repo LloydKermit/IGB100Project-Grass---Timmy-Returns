@@ -7,34 +7,17 @@ public class Angel : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    public GameObject target;
-
     public float moveSpeed = 0f;
     public float angelmovespeed = 15f;
 
-    public int damage = 20;
-    public int health = 100;
     public Collider triggerCollider;
 
     Enemy enemy;
-    PlayerScript player;
 
     private void Start()
     {
         enemy = GetComponent<Enemy>();
         moveSpeed = angelmovespeed;
-        player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
-
-        //Player Reference exception catch
-        try
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
-        catch
-        {
-            target = null;
-        }
-
     }
     private void Update()
     {
@@ -42,7 +25,7 @@ public class Angel : MonoBehaviour
 
         enemy.Binded += Time.deltaTime;
 
-        if (player.BindingBrambles == true && this.tag == "Angel")
+        if (enemy.player.BindingBrambles == true && this.tag == "Angel")
         {
             if (enemy.Binded >= 0)
             {
@@ -64,9 +47,9 @@ public class Angel : MonoBehaviour
     {
         try
         {
-            if (target)
+            if (enemy.target)
             {
-                agent.destination = target.transform.position;
+                agent.destination = enemy.target.transform.position;
                 agent.speed = moveSpeed;
             }
         }
@@ -78,18 +61,11 @@ public class Angel : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        StartCoroutine(TakeHit());
+        StartCoroutine(enemy.TakeHit());
     }
 
     private void OnTriggerExit(Collider collision)
     {
         StopAllCoroutines();
-    }
-
-    IEnumerator TakeHit()
-    {
-        player.takedamage(damage);
-        yield return new WaitForSeconds(1);
-        StartCoroutine(TakeHit());
     }
 }
