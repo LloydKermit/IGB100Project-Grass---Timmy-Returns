@@ -3,7 +3,27 @@ guid: be577ba4b2db0b449b52d41e65b57a00
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NormalAngelTexture
+    second: {fileID: 2100000, guid: df6ce4d2a4f7bcd44a3824a515a84bc7, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: NormalAngel_aiStandardSurface_Emissive
+    second: {fileID: 2800000, guid: 3ec2dc19db4913a438fdc86a3ddc53a0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: NormalAngel_aiStandardSurface_Metallic
+    second: {fileID: 2800000, guid: 17bd7bb46adfe604ba6da1190702f3b3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: NormalAngel_aiStandardSurface_Roughness
+    second: {fileID: 2800000, guid: eb6c4b7d725225345a9b686a1a3b6094, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
