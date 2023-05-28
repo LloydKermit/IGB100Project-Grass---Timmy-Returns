@@ -44,7 +44,7 @@ public class AngelSpawner : MonoBehaviour
         Debug.Log("Hello");
         yield return new WaitForSeconds(1.5f);
 
-        if (archCount < maxArch)
+        if (archCount < maxArch && AngelCount < MaxAngel)
         {
             int randomIndex = Random.Range(9, 14);
             var Beam = spawnPoints[randomIndex].GetComponentInParent<Beam>();
@@ -53,6 +53,7 @@ public class AngelSpawner : MonoBehaviour
             {
                 AngelCount++;
                 archCount++;
+
                 Debug.Log(archCount);
 
                 RanSpawn.Add(randomIndex);
@@ -124,7 +125,7 @@ public class AngelSpawner : MonoBehaviour
 
         if (WinLose.WavesCount < 7)
         {
-            if (WinLose.AngelsKilled == WinLose.AngelsLeft)
+            if (WinLose.AngelsKilled >= WinLose.AngelsLeft)
             {
                 StopCoroutine(Angels);
                 AngelCount = 0;
