@@ -18,6 +18,8 @@ public class WinLose : MonoBehaviour
 
     WaveText waveText;
 
+    private IInteractable _interactable;
+
     public void Start()
     {
         waveText = GetComponent<WaveText>();
@@ -32,11 +34,6 @@ public class WinLose : MonoBehaviour
         else
         {
             upgradePrompt.layer = 0;
-        }
-
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            canInteract = false;
         }
 
         if (BossDead)

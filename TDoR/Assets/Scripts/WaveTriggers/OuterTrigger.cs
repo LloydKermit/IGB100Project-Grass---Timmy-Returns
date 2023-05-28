@@ -10,7 +10,9 @@ public class OuterTrigger : MonoBehaviour
     public GameObject Gate;
     public GameObject Spawners;
     public GameObject InnerTrig;
+    public GameObject GateBorder;
 
+    BoxCollider gateBCollide;
     MeshRenderer gateMesh;
     MeshCollider gateCollider;
 
@@ -25,6 +27,7 @@ public class OuterTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gateBCollide = GateBorder.GetComponent<BoxCollider>();
         gateMesh = Gate.GetComponent<MeshRenderer>();
         gateCollider = Gate.GetComponent<MeshCollider>();
         angelSpawner = Spawners.GetComponent<AngelSpawner>();
@@ -42,7 +45,7 @@ public class OuterTrigger : MonoBehaviour
             gateClosed = false;
             gateMesh.enabled = false;
             gateCollider.enabled = false;
-
+            gateBCollide.enabled = false;
         }
 
         if (InnerTrig.GetComponent<BoxCollider>().enabled == false)
@@ -64,14 +67,17 @@ public class OuterTrigger : MonoBehaviour
                 gateClosed = true;
                 gateMesh.enabled = true;
                 gateCollider.enabled = true;
+                gateBCollide.enabled = true;
 
-                //var fenceBorder = GameObject.FindGameObjectsWithTag("FenceBorder");
-                //for (var i = 0; i < fenceBorder.Length; i++)
+                //var Beams = GameObject.FindGameObjectsWithTag("Beam");
+                //for (var i = 0; i < Beams.Length; i++)
                 //{
-                //    fenceBorder[i].GetComponent<BoxCollider>().enabled = true; 
+                //    Beams[i].GetComponent<MeshRenderer>().enabled = true;
                 //}
 
                 Coroutine Angels = StartCoroutine(angelSpawner.StartSceneWait());
+
+                Coroutine ArchSpawn = StartCoroutine(angelSpawner.SpawnArch());
 
                 var triggers = GameObject.FindGameObjectsWithTag("Trigger");
                 for (var i = 0; i < triggers.Length; i++)

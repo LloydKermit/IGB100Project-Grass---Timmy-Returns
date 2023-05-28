@@ -48,6 +48,7 @@ public class Interactor : MonoBehaviour
                     upgradeScript.Upgrade();
                     upgradePanel.SetActive(true);
                     _playerScript.Heal();
+                    WinLose.canInteract = false;
 
                     Time.timeScale = 0;
 

@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
         }
         if (this.tag == "Archangel")
         {
-            health = 150;
+            health = 250;
             damage = 50;
         }
     }
