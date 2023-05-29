@@ -12,6 +12,7 @@ public class WinLose : MonoBehaviour
     public static int AngelsKilled = 0;
     public static bool BossDead = false;
     public static bool canInteract = false;
+    public static bool hasInteracted = true;
 
     public PauseMenuScript Menu;
     public GameObject upgradePrompt;

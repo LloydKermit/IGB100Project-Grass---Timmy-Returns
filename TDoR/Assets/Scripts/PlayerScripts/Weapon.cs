@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
     private PlayerScript playerScript;
 
     public int ARdamage = 25;
-    public float ARrange = 100f;
     public float ARfireRate = 0.2f;
     public float CritChance = 5.0f;
 
@@ -31,6 +30,7 @@ public class Weapon : MonoBehaviour
     {
         ARdamage = 25;
         ARfireRate = 0.2f;
+        CritChance = 5.0f;
 
         playerScript = Player.GetComponent<PlayerScript>();
         Fireanimation = GetComponent<Animation>();
@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
         Destroy(flash, 0.05f);
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, ARrange))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
         {
             //Damage Enemies
             if (hit.transform.tag == "Angel" || hit.transform.tag == "Archangel" || hit.transform.tag == "Seraph")
@@ -69,6 +69,7 @@ public class Weapon : MonoBehaviour
                     if (randValue < CritChance)
                     {
                         hit.transform.GetComponent<Enemy>().takeDamage(ARdamage * 2);
+                        Debug.Log("Crit");
                     }
                     else
                     {
@@ -89,7 +90,7 @@ public class Weapon : MonoBehaviour
                 GameObject EnemyImpact = Instantiate(EnemyhitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(EnemyImpact, 1f);
             }
-            else if (hit.transform.tag != "FenceBorder")
+            else if (hit.transform.tag != "FenceBorder" || hit.transform.tag != "Trigger")
             {
                 GameObject NonEnemyImpact = Instantiate(NonEnemyhitEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 Destroy(NonEnemyImpact, 1f);

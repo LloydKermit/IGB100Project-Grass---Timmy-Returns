@@ -23,8 +23,11 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] _colliders = new Collider[2];
     [SerializeField] private int _numFound;
 
+    WaveText _waveText;
+
     public void Start()
     {
+        _waveText = GameObject.Find("GameController").GetComponent<WaveText>();
         _playerScript = Player.GetComponent<PlayerScript>();
         upgradeScript = gameController.GetComponent<UpgradeScript>();
     }
@@ -48,7 +51,11 @@ public class Interactor : MonoBehaviour
                     upgradeScript.Upgrade();
                     upgradePanel.SetActive(true);
                     _playerScript.Heal();
+                    _waveText.comeBack.enabled = false;
+
+
                     WinLose.canInteract = false;
+                    WinLose.hasInteracted = true;
 
                     Time.timeScale = 0;
 

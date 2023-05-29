@@ -9,6 +9,7 @@ public class WaveText : MonoBehaviour
 {
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI AngelCounter;
+    public TextMeshProUGUI comeBack;
     public AngelSpawner angelSpawner;
 
     public bool waveCleared;
@@ -39,6 +40,7 @@ public class WaveText : MonoBehaviour
         WinLose.canInteract = true;
         waveCleared = true;
         AngelCounter.text = "Wave Cleared";
+        comeBack.enabled = true;
     }
 
     public void AngelsLeft()

@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class PauseMenuScript : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject winMenuUI;
     public GameObject deathMenuUI;
+    public TextMeshProUGUI timer;
     void Update()
     {
 
@@ -39,6 +41,7 @@ public class PauseMenuScript : MonoBehaviour
         Weapon.GetComponent<Weapon>().enabled = true;
         Player.GetComponent<FirstPersonController>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        timer.enabled = false;
 
         gamePaused = false;
     }
@@ -51,6 +54,7 @@ public class PauseMenuScript : MonoBehaviour
         Weapon.GetComponent<Weapon>().enabled = false;
         Player.GetComponent<FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
+        timer.enabled = true;
 
         gamePaused = true;
     }
@@ -60,14 +64,20 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
+        gamePaused = false;
+
         WinLose.WavesCount = 0;
         WinLose.AngelsLeft = 0;
         WinLose.AngelsKilled = 0;
+        WinLose.BossDead = false;
+        WinLose.canInteract = false;
+        WinLose.hasInteracted = true;
 
-        Timer.TimeisRunning = false;
+        Timer.TimeisRunning = true;
         Timer.TimeElapsed = 0;
+        timer.enabled = false;
 
-        gamePaused = false;
+        OuterTrigger.gateClosed = false;
     }
 
     public void Win()
@@ -79,6 +89,7 @@ public class PauseMenuScript : MonoBehaviour
         Weapon.GetComponent<Weapon>().enabled = false;
         Player.GetComponent<FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
+        timer.enabled = true;
 
         gamePaused = true;
         Timer.TimeisRunning = false;
@@ -93,6 +104,7 @@ public class PauseMenuScript : MonoBehaviour
         Weapon.GetComponent<Weapon>().enabled = false;
         Player.GetComponent<FirstPersonController>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
+        timer.enabled = true;
 
         gamePaused = true;
         Timer.TimeisRunning = false;
@@ -115,9 +127,11 @@ public class PauseMenuScript : MonoBehaviour
         WinLose.AngelsKilled = 0;
         WinLose.BossDead = false;
         WinLose.canInteract = false;
+        WinLose.hasInteracted = true;
 
         Timer.TimeisRunning = true;
         Timer.TimeElapsed = 0;
+        timer.enabled = false;
 
         OuterTrigger.gateClosed = false;
     }

@@ -45,16 +45,18 @@ public class PlayerScript : MonoBehaviour
     public void Heal()
     {
         currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
     public void takedamage(int damage)
     {
         if (StoneSkin)
         {
-            damage -= 4;
+            Mathf.RoundToInt(damage * 0.75f);
 
             currentHealth -= damage;
 
             healthBar.SetHealth(currentHealth);
+
         }
         else
         {

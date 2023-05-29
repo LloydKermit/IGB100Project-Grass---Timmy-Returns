@@ -62,7 +62,7 @@ public class AngelSpawner : MonoBehaviour
                 yield return new WaitForSeconds(1);
 
                 if (archCount >= maxArch || WinLose.AngelsKilled >= WinLose.AngelsLeft + maxArch)
-                    break; // Exit the while loop if the desired number of spawns is reached
+                    break;
             }
         }
 

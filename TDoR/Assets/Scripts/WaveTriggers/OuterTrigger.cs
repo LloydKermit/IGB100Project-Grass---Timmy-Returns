@@ -9,7 +9,7 @@ public class OuterTrigger : MonoBehaviour
     public static bool gateClosed;
     public GameObject Gate;
     public GameObject Spawners;
-    public GameObject InnerTrig;
+    //public GameObject InnerTrig;
     public GameObject GateBorder;
 
     BoxCollider gateBCollide;
@@ -31,7 +31,7 @@ public class OuterTrigger : MonoBehaviour
         gateMesh = Gate.GetComponent<MeshRenderer>();
         gateCollider = Gate.GetComponent<MeshCollider>();
         angelSpawner = Spawners.GetComponent<AngelSpawner>();
-        InnerTrig = GameObject.FindGameObjectWithTag("InnerTrigger");
+        //InnerTrig = GameObject.FindGameObjectWithTag("InnerTrigger");
 
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
 
@@ -48,12 +48,20 @@ public class OuterTrigger : MonoBehaviour
             gateBCollide.enabled = false;
         }
 
-        if (InnerTrig.GetComponent<BoxCollider>().enabled == false)
+        if (WinLose.hasInteracted == true)
         {
             var triggers = GameObject.FindGameObjectsWithTag("Trigger");
             for (var i = 0; i < triggers.Length; i++)
             {
                 triggers[i].GetComponent<BoxCollider>().enabled = true;
+            }
+        }
+        else if (WinLose.hasInteracted == false)
+        {
+            var triggers = GameObject.FindGameObjectsWithTag("Trigger");
+            for (var i = 0; i < triggers.Length; i++)
+            {
+                triggers[i].GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
@@ -68,6 +76,7 @@ public class OuterTrigger : MonoBehaviour
                 gateMesh.enabled = true;
                 gateCollider.enabled = true;
                 gateBCollide.enabled = true;
+                WinLose.hasInteracted = false;
 
                 //var Beams = GameObject.FindGameObjectsWithTag("Beam");
                 //for (var i = 0; i < Beams.Length; i++)
@@ -85,7 +94,7 @@ public class OuterTrigger : MonoBehaviour
                     triggers[i].GetComponent<BoxCollider>().enabled = false;
                 }
 
-                InnerTrig.GetComponent<BoxCollider>().enabled = true;
+                //InnerTrig.GetComponent<BoxCollider>().enabled = true;
 
                 WinLose.WavesCount += 1;
 

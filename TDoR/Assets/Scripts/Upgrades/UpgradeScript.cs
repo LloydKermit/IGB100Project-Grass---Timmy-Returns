@@ -181,13 +181,13 @@ public class UpgradeScript : MonoBehaviour
 
     private void HealingHerbs()
     {   
-        //25% increase in HP
-        playerScript.SetHealth(50);
+        //50% increase in HP
+        playerScript.SetHealth(100);
     }
 
     private void StoneSkin()
     {
-        //Reduce damage by 10%
+        //Reduce damage by 25%
         playerScript.StoneSkinOn();
     }
 

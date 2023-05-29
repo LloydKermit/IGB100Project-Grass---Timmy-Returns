@@ -33,7 +33,7 @@ public class Angel : MonoBehaviour
             }
             else
             {
-                moveSpeed = angelmovespeed * 0.8f;
+                moveSpeed = angelmovespeed * 0.5f;
             }
         }
     }

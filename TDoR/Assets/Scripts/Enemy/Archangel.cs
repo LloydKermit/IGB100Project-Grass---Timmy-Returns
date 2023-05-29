@@ -11,6 +11,15 @@ public class Archangel : MonoBehaviour
     private Vector3 lookDir;
     private Vector3 lastPosition;
     private GameObject target;
+
+    public GameObject Staff;
+    public GameObject firePoint;
+
+    public Material charged;
+    public Material cooldown;
+
+    private Renderer staffRend;
+
     [SerializeField] private bool isShooting = false;
 
     Enemy enemy;
@@ -26,6 +35,7 @@ public class Archangel : MonoBehaviour
     {
         StartCoroutine(ShootingCooldown());
 
+        staffRend = Staff.GetComponent<Renderer>();
         enemy = GetComponent<Enemy>();
         player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
 
@@ -51,7 +61,7 @@ public class Archangel : MonoBehaviour
         if (isShooting == false)
         {
             // Rotate Timmy to face cursor
-            lookDir = target.transform.position - transform.position;
+            lookDir = target.transform.position - firePoint.transform.position;
             Quaternion rotation = Quaternion.LookRotation(lookDir);
             transform.rotation = rotation;
         }
@@ -65,17 +75,20 @@ public class Archangel : MonoBehaviour
 
     IEnumerator Shooting()
     {
-        yield return new WaitForSeconds(0.2f);
+        staffRend.material = charged;
+        yield return new WaitForSeconds(0.3f);
         Shoot();
         isShooting = false;
+        yield return new WaitForSeconds(0.5f);
+        staffRend.material = cooldown;
     }
 
     private void Shoot()
     {
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, firePoint.transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, lastPosition, out hit))
+        if (Physics.Raycast(firePoint.transform.position, lastPosition, out hit))
         {
             if (hit.transform.tag == "Player")
             {
