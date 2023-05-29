@@ -44,6 +44,11 @@ public class Enemy : MonoBehaviour
             health = 250;
             damage = 40;
         }
+        if (this.tag == "Seraph")
+        {
+            health = 5000;
+            damage = 100;
+        }
     }
 
     public void takeDamage(int damage)
@@ -83,3 +88,4 @@ public class Enemy : MonoBehaviour
     }
 
 }
+    
