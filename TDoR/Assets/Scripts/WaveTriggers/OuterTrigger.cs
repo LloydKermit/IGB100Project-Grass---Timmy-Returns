@@ -40,7 +40,7 @@ public class OuterTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (WinLose.AngelsKilled == WinLose.AngelsLeft)
+        if (WinLose.AngelsKilled >= WinLose.AngelsLeft + angelSpawner.maxArch)
         {
             gateClosed = false;
             gateMesh.enabled = false;
@@ -77,7 +77,7 @@ public class OuterTrigger : MonoBehaviour
 
                 Coroutine Angels = StartCoroutine(angelSpawner.StartSceneWait());
 
-                Coroutine ArchSpawn = StartCoroutine(angelSpawner.SpawnArch());
+                Coroutine ArchSpawn = StartCoroutine(angelSpawner.StartSceneWaitArch());
 
                 var triggers = GameObject.FindGameObjectsWithTag("Trigger");
                 for (var i = 0; i < triggers.Length; i++)

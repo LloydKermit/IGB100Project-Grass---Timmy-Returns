@@ -12,7 +12,7 @@ public class AngelSpawner : MonoBehaviour
 
     public bool ArchSpawning = false;
     private int archCount = 0;
-    private int maxArch;
+    public int maxArch;
     public int AngelCount;
     public int MaxAngel;
     private int bossCount = 0;
@@ -23,6 +23,7 @@ public class AngelSpawner : MonoBehaviour
     {
         MaxAngel = 10;
         WinLose.AngelsLeft = MaxAngel;
+        maxArch = 0;
 
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
     }
@@ -30,8 +31,6 @@ public class AngelSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        maxArch = WinLose.WavesCount - 2;
-
         if (WinLose.WavesCount == 7 && bossCount == 0)
         {
             var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(180, 0, 0)));
@@ -41,66 +40,71 @@ public class AngelSpawner : MonoBehaviour
 
     public IEnumerator SpawnArch()
     {
-        Debug.Log("Hello");
-        yield return new WaitForSeconds(1.5f);
-
-        if (archCount < maxArch && AngelCount < MaxAngel)
+        while (archCount < maxArch)
         {
             int randomIndex = Random.Range(9, 14);
             var Beam = spawnPoints[randomIndex].GetComponentInParent<Beam>();
 
             if (!RanSpawn.Contains(randomIndex))
             {
-                AngelCount++;
-                archCount++;
-
+                archCount += 1;
                 Debug.Log(archCount);
 
                 RanSpawn.Add(randomIndex);
 
                 Beam.StartCoroutine(Beam.SummonArch());
                 yield return new WaitForSeconds(1);
+                Debug.Log("Beam");
+
                 var cloneArch = Instantiate(enemyPrefab[2], spawnPoints[randomIndex].position, Quaternion.Euler(new Vector3(180, 0, 0)));
+                Debug.Log("Spawned");
+
+                yield return new WaitForSeconds(1);
+
+                if (archCount >= maxArch || WinLose.AngelsKilled >= WinLose.AngelsLeft + maxArch)
+                    break; // Exit the while loop if the desired number of spawns is reached
             }
         }
 
-        Coroutine ArchSpawn = StartCoroutine(SpawnArch());
-
-        if (archCount == maxArch)
+        if (archCount >= maxArch || WinLose.AngelsKilled >= WinLose.AngelsLeft + maxArch)
         {
-            StopCoroutine(ArchSpawn);
-            RanSpawn.Clear();
             archCount = 0;
         }
     }
 
-    //private IEnumerator SpawnArch()
-    //{
-    //    while (RanSpawn.Count < WinLose.WavesCount - 2 && WinLose.WavesCount >= 3)
-    //    {
-    //        int randomIndex = Random.Range(9, 14);
+        //private IEnumerator SpawnArch()
+        //{
+        //    while (RanSpawn.Count < WinLose.WavesCount - 2 && WinLose.WavesCount >= 3)
+        //    {
+        //        int randomIndex = Random.Range(9, 14);
 
-    //        if (!RanSpawn.Contains(randomIndex))
-    //        {
-    //            RanSpawn.Add(randomIndex);
-    //        }
-    //    }
+        //        if (!RanSpawn.Contains(randomIndex))
+        //        {
+        //            RanSpawn.Add(randomIndex);
+        //        }
+        //    }
 
-    //    if (archCount < maxArch)
-    //    {
-    //        archCount++;
-    //        AngelCount += 1;
+        //    if (archCount < maxArch)
+        //    {
+        //        archCount++;
+        //        AngelCount += 1;
 
-    //        Debug.Log(RanSpawn[archCount]);
-    //        var Beam = spawnPoints[RanSpawn[archCount]].GetComponentInParent<Beam>();
-    //        Beam.StartCoroutine(Beam.SummonArch());
-    //        var cloneArch = Instantiate(enemyPrefab[2], spawnPoints[RanSpawn[archCount]].position, Quaternion.Euler(new Vector3(180, 0, 0)));
-    //        yield return new WaitForSeconds(1);
-    //    }
+        //        Debug.Log(RanSpawn[archCount]);
+        //        var Beam = spawnPoints[RanSpawn[archCount]].GetComponentInParent<Beam>();
+        //        Beam.StartCoroutine(Beam.SummonArch());
+        //        var cloneArch = Instantiate(enemyPrefab[2], spawnPoints[RanSpawn[archCount]].position, Quaternion.Euler(new Vector3(180, 0, 0)));
+        //        yield return new WaitForSeconds(1);
+        //    }
 
-    //    ArchSpawned = true;
+        //    ArchSpawned = true;
 
-    //}
+        //}
+
+        public IEnumerator StartSceneWaitArch()
+    {
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(SpawnArch());
+    }
 
     public IEnumerator StartSceneWait()
     {
@@ -125,7 +129,7 @@ public class AngelSpawner : MonoBehaviour
 
         if (WinLose.WavesCount < 7)
         {
-            if (WinLose.AngelsKilled >= WinLose.AngelsLeft)
+            if (WinLose.AngelsKilled >= WinLose.AngelsLeft + maxArch)
             {
                 StopCoroutine(Angels);
                 AngelCount = 0;
@@ -137,6 +141,7 @@ public class AngelSpawner : MonoBehaviour
                 MaxAngel = 10 + (5 * WinLose.WavesCount);
                 WinLose.AngelsLeft = MaxAngel;
                 WinLose.AngelsKilled = 0;
+                maxArch = WinLose.WavesCount - 1;
             }
         }
         else if (WinLose.WavesCount == 7)

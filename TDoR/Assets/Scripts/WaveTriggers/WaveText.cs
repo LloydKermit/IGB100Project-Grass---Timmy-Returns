@@ -9,6 +9,7 @@ public class WaveText : MonoBehaviour
 {
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI AngelCounter;
+    public AngelSpawner angelSpawner;
 
     public bool waveCleared;
 
@@ -44,7 +45,7 @@ public class WaveText : MonoBehaviour
     {
         if (WinLose.WavesCount < 7)
         {
-            AngelCounter.text = "Angels Left: " + WinLose.AngelsKilled.ToString() + " / " + WinLose.AngelsLeft.ToString();
+            AngelCounter.text = "Angels Killed: " + WinLose.AngelsKilled.ToString() + " / " + (WinLose.AngelsLeft + angelSpawner.maxArch).ToString();
         }
         else
         {
