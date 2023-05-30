@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     public float Binded = 0;
 
+    BossHPBar bossHPBar;
     WaveText waveText;
     public PlayerScript player;
 
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
         }
 
         player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
-
+        bossHPBar = GameObject.Find("BossHPBar").GetComponent<BossHPBar>();
         waveText = GameObject.Find("GameController").GetComponent<WaveText>();
 
         if (this.tag == "Angel")
@@ -47,7 +48,9 @@ public class Enemy : MonoBehaviour
         if (this.tag == "Seraph")
         {
             health = 5000;
-            damage = 100;
+            damage = 50;
+
+            bossHPBar.SetMaxHealth(health);
         }
     }
 
@@ -56,6 +59,11 @@ public class Enemy : MonoBehaviour
         Binded = -2;
 
         health -= damage;
+
+        if (this.tag == "Seraph")
+        {
+            bossHPBar.SetHealth(health);
+        }
 
         if (health <= 0)
         {

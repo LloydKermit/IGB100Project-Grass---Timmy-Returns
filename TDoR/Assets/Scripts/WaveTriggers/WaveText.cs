@@ -14,8 +14,11 @@ public class WaveText : MonoBehaviour
 
     public bool waveCleared;
 
+    Canvas bossHPBar;
+
     public void Awake()
     {
+        bossHPBar = GameObject.Find("BossHPBar").GetComponent<Canvas>();
         waveText.text = "Wave: " + WinLose.WavesCount.ToString();
         AngelCounter.text = "Angels Left: " + WinLose.AngelsKilled.ToString() + " / " + WinLose.AngelsLeft.ToString();
 
@@ -31,6 +34,7 @@ public class WaveText : MonoBehaviour
         }
         else if (WinLose.WavesCount >= 7)
         {
+            bossHPBar.enabled = true;
             waveText.text = "Judgement";
         }
     }
@@ -41,6 +45,7 @@ public class WaveText : MonoBehaviour
         waveCleared = true;
         AngelCounter.text = "Wave Cleared";
         comeBack.enabled = true;
+        OuterTrigger.gateClosed = false;
     }
 
     public void AngelsLeft()

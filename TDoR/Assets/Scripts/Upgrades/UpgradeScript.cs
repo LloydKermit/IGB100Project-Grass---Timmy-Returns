@@ -10,6 +10,11 @@ using System.Linq;
 
 public class UpgradeScript : MonoBehaviour
 {
+    [Header("Upgrade Icons")]
+    public int NumUpgrades = 0;
+    public Image[] icons;
+    public Sprite[] smallIcons;
+
     [Header("Sprites for Image")]
     public Sprite[] iconSprites;
 
@@ -49,6 +54,7 @@ public class UpgradeScript : MonoBehaviour
         playerScript = Player.GetComponent<PlayerScript>();
         weapon = Weapon.GetComponent<Weapon>();
 
+        NumUpgrades = 0;
         int availableIndex = 0;
         foreach (var upgrade in upgradeNames)
         {
@@ -68,6 +74,8 @@ public class UpgradeScript : MonoBehaviour
 
     private void ApplySelectedUpgrade()
     {
+        NumUpgrades++;
+
         UpgradeButton selectedButton = assignedUpgrades[selectedButtonIndex];
 
         string upgradeName = assignedUpgrades[selectedButtonIndex].UpgradeName;
@@ -81,30 +89,48 @@ public class UpgradeScript : MonoBehaviour
         {
             case "Swift as the Wind":
                 SwiftAsTheWind();
+                icons[NumUpgrades - 1].sprite = smallIcons[0];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Savage Strength":
                 SavageStrength();
+                icons[NumUpgrades - 1].sprite = smallIcons[1];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Bullet Fury":
                 BulletFury();
+                icons[NumUpgrades - 1].sprite = smallIcons[2];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Healing Herbs":
                 HealingHerbs();
+                icons[NumUpgrades - 1].sprite = smallIcons[3];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Stone Skin":
                 StoneSkin();
+                icons[NumUpgrades - 1].sprite = smallIcons[4];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Leaf Launch":
                 LeafLaunch();
+                icons[NumUpgrades - 1].sprite = smallIcons[5];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Binding Brambles":
                 BindingBrambles();
+                icons[NumUpgrades - 1].sprite = smallIcons[6];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Bountiful Harvest":
                 BountifulHarvest();
+                icons[NumUpgrades - 1].sprite = smallIcons[7];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             case "Piercing Thorns":
                 PiercingThorns();
+                icons[NumUpgrades - 1].sprite = smallIcons[8];
+                icons[NumUpgrades - 1].GetComponent<Image>().enabled = true;
                 break;
             default:
                 Debug.LogWarning("Unknown power-up selected!");
@@ -154,8 +180,6 @@ public class UpgradeScript : MonoBehaviour
             Upgrades upgrade = new Upgrades(iconSprites[ranUpgrade[i]], upgradeNames[ranUpgrade[i]], upgradeDescriptions[ranUpgrade[i]]);
 
             upgradeButtons[i].image.sprite = upgrade.UpgradeIcon;
-            upgradeName[i].text = upgrade.UpgradeName;
-            upgradeDescription[i].text = upgrade.UpgradeDescription;
 
             UpgradeButton upgradeButton = new UpgradeButton(upgrade.UpgradeIcon, upgrade.UpgradeName, upgrade.UpgradeDescription, upgradeButtons[i]);
 

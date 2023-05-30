@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Archangel : MonoBehaviour
 {
-    public int health;
-    public int damage;
     private bool hasBeenHit = false;
 
     private Vector3 lookDir;

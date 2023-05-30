@@ -16719,7 +16719,7 @@ MonoBehaviour:
   damage: 0
   Staff: {fileID: 5885426605123274427}
   firePoint: {fileID: 5885426605477675343}
-  charged: {fileID: 2100000, guid: 0b2720cc5fedccf4c9263d26e8eb64f5, type: 2}
+  charged: {fileID: 2100000, guid: 3533e348b1d9df84082ec7de6196cda9, type: 2}
   cooldown: {fileID: 2100000, guid: 8344e7c9095a59f46acdd4b6f5f72ec3, type: 2}
   isShooting: 0
 --- !u!120 &5885426605986768053
@@ -16786,7 +16786,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 0.7490196, g: 0.7019608, b: 0, a: 1}
       key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

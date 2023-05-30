@@ -53,7 +53,6 @@ public class Interactor : MonoBehaviour
                     _playerScript.Heal();
                     _waveText.comeBack.enabled = false;
 
-
                     WinLose.canInteract = false;
                     WinLose.hasInteracted = true;
 

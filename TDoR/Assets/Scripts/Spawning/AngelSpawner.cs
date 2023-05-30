@@ -33,7 +33,7 @@ public class AngelSpawner : MonoBehaviour
     {
         if (WinLose.WavesCount == 7 && bossCount == 0)
         {
-            var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(180, 0, 0)));
+            var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             bossCount++;
         }
     }
@@ -71,35 +71,6 @@ public class AngelSpawner : MonoBehaviour
             archCount = 0;
         }
     }
-
-        //private IEnumerator SpawnArch()
-        //{
-        //    while (RanSpawn.Count < WinLose.WavesCount - 2 && WinLose.WavesCount >= 3)
-        //    {
-        //        int randomIndex = Random.Range(9, 14);
-
-        //        if (!RanSpawn.Contains(randomIndex))
-        //        {
-        //            RanSpawn.Add(randomIndex);
-        //        }
-        //    }
-
-        //    if (archCount < maxArch)
-        //    {
-        //        archCount++;
-        //        AngelCount += 1;
-
-        //        Debug.Log(RanSpawn[archCount]);
-        //        var Beam = spawnPoints[RanSpawn[archCount]].GetComponentInParent<Beam>();
-        //        Beam.StartCoroutine(Beam.SummonArch());
-        //        var cloneArch = Instantiate(enemyPrefab[2], spawnPoints[RanSpawn[archCount]].position, Quaternion.Euler(new Vector3(180, 0, 0)));
-        //        yield return new WaitForSeconds(1);
-        //    }
-
-        //    ArchSpawned = true;
-
-        //}
-
         public IEnumerator StartSceneWaitArch()
     {
         yield return new WaitForSeconds(1.5f);
@@ -138,7 +109,7 @@ public class AngelSpawner : MonoBehaviour
 
                 waveText.WaveDone();
 
-                MaxAngel = 10 + (5 * WinLose.WavesCount);
+                MaxAngel = 10 + (3 * WinLose.WavesCount);
                 WinLose.AngelsLeft = MaxAngel;
                 WinLose.AngelsKilled = 0;
                 maxArch = WinLose.WavesCount - 1;
