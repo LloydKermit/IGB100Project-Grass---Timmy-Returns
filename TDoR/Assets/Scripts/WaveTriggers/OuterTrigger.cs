@@ -12,6 +12,8 @@ public class OuterTrigger : MonoBehaviour
     //public GameObject InnerTrig;
     public GameObject GateBorder;
 
+    public AudioSource _SFX;
+
     BoxCollider gateBCollide;
     MeshRenderer gateMesh;
     MeshCollider gateCollider;
@@ -77,6 +79,8 @@ public class OuterTrigger : MonoBehaviour
                 gateCollider.enabled = true;
                 gateBCollide.enabled = true;
                 WinLose.hasInteracted = false;
+
+                _SFX.Play();
 
                 //var Beams = GameObject.FindGameObjectsWithTag("Beam");
                 //for (var i = 0; i < Beams.Length; i++)
