@@ -47,8 +47,8 @@ public class Enemy : MonoBehaviour
         }
         if (this.tag == "Seraph")
         {
-            health = 5000;
-            damage = 50;
+            health = 2500;
+            damage = 150;
 
             bossHPBar.SetMaxHealth(health);
         }
