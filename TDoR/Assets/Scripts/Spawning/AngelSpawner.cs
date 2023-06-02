@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class AngelSpawner : MonoBehaviour
@@ -21,7 +22,7 @@ public class AngelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxAngel = 10;
+        MaxAngel = 1;
         WinLose.AngelsLeft = MaxAngel;
         maxArch = 0;
 
@@ -33,9 +34,18 @@ public class AngelSpawner : MonoBehaviour
     {
         if (WinLose.WavesCount == 7 && bossCount == 0)
         {
-            var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(0, 180, 0)));
             bossCount++;
+            StartCoroutine(SpawnSeraph());
         }
+    }
+
+    public IEnumerator SpawnSeraph()
+    {
+        var Beam = bossSpawn.GetComponentInParent<Beam>();
+        Beam.StartCoroutine(Beam.SummonSeraph());
+        yield return new WaitForSeconds(1);
+
+        var boss = Instantiate(enemyPrefab[1], bossSpawn.position, Quaternion.Euler(new Vector3(0, 180, 0)));
     }
 
     public IEnumerator SpawnArch()
@@ -109,7 +119,7 @@ public class AngelSpawner : MonoBehaviour
 
                 waveText.WaveDone();
 
-                MaxAngel = 10 + (3 * WinLose.WavesCount);
+                MaxAngel = 1 + (0 * WinLose.WavesCount);
                 WinLose.AngelsLeft = MaxAngel;
                 WinLose.AngelsKilled = 0;
                 maxArch = WinLose.WavesCount - 1;

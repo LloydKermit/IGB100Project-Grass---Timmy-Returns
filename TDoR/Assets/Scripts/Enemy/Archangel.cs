@@ -79,6 +79,7 @@ public class Archangel : MonoBehaviour
         isShooting = false;
         yield return new WaitForSeconds(0.5f);
         staffRend.material = cooldown;
+        StartCoroutine(ShootingCooldown());
     }
 
     private void Shoot()
@@ -108,9 +109,8 @@ public class Archangel : MonoBehaviour
 
     IEnumerator ShootingCooldown()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         isShooting = true;
-        StartCoroutine(ShootingCooldown());
     }
 
     IEnumerator ShootLaster()

@@ -18,6 +18,7 @@ TagManager:
   - RayTarget
   - Archangel
   - NormalAngelBeam
+  - SeraphBeam
   layers:
   - Default
   - TransparentFX

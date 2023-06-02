@@ -147,11 +147,13 @@ public class UpgradeScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         upgradePanel.SetActive(false);
+        confirmButton.enabled = false;
     }
 
     private void SelectButton(int buttonIndex)
     {
         selectedButtonIndex = buttonIndex;
+        confirmButton.enabled = true;
     }
     public void Upgrade()
     {

@@ -92,6 +92,8 @@ public class SeraphRotate : MonoBehaviour
         {
             eyeRend[i].material = cooldown;
         }
+
+        StartCoroutine(ShootingCooldown());
     }
 
     private IEnumerator Shoot()
@@ -141,8 +143,7 @@ public class SeraphRotate : MonoBehaviour
 
     IEnumerator ShootingCooldown()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         isShooting = true;
-        StartCoroutine(ShootingCooldown());
     }
 }

@@ -50,6 +50,19 @@ public class Beam : MonoBehaviour
         }
     }
 
+    public IEnumerator SummonSeraph()
+    {
+        Debug.Log("Seraph");
+        this.GetComponent<MeshRenderer>().enabled = true;
+        if (animationPlayed == false)
+        {
+            SpawnBeam.Play("SeraphBeam");
+            yield return new WaitForSeconds(1f);
+            animationPlayed = true;
+            this.GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+
     public void WaveEnd()
     {
         this.GetComponent<MeshRenderer>().enabled = false;
