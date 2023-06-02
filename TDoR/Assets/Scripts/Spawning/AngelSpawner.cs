@@ -22,7 +22,7 @@ public class AngelSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MaxAngel = 1;
+        MaxAngel = 5;
         WinLose.AngelsLeft = MaxAngel;
         maxArch = 0;
 
@@ -119,7 +119,7 @@ public class AngelSpawner : MonoBehaviour
 
                 waveText.WaveDone();
 
-                MaxAngel = 1 + (0 * WinLose.WavesCount);
+                MaxAngel = 5 + (4 * WinLose.WavesCount);
                 WinLose.AngelsLeft = MaxAngel;
                 WinLose.AngelsKilled = 0;
                 maxArch = WinLose.WavesCount - 1;
