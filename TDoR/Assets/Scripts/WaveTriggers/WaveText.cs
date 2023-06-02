@@ -56,7 +56,7 @@ public class WaveText : MonoBehaviour
         }
         else
         {
-            AngelCounter.text = "Kill the Cube";
+            AngelCounter.text = "Kill the Seraph";
         }
     }
 }
