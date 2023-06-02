@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -73,8 +72,6 @@ public class SeraphRotate : MonoBehaviour
             StartCoroutine(Shooting());
         }
 
-        Debug.DrawRay(firePoint[0].transform.position, target.transform.position, Color.red);
-        Debug.Log("lookDir: " + lookDir);
     }
 
     IEnumerator Shooting()
